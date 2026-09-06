@@ -8,6 +8,19 @@
   playbooks: []
   disk_size_gb: null
   location: src/compilation/images/ubuntu20.qcow2
+- name: ubuntu24_root_ssh
+  parent: ubuntu24
+  playbooks:
+  - enable_root_ssh
+  disk_size_gb: null
+  location: /data/mhbench/images/ubuntu24_root_ssh.qcow2
+- name: ubuntu24_base
+  parent: ubuntu24_root_ssh
+  playbooks:
+  - install_base_packages
+  - enable_host_logging
+  disk_size_gb: 12
+  location: /data/mhbench/images/ubuntu24_base.qcow2
 - name: Kali
   parent: null
   playbooks: []
@@ -21,31 +34,31 @@
   - enable_host_logging
   - kali_packages
   disk_size_gb: null
-  location: src/compilation/images/kali_base.qcow2
+  location: /data/mhbench/images/kali_base.qcow2
 - name: ubuntu_root_ssh
   parent: ubuntu20
   playbooks:
   - enable_root_ssh
   disk_size_gb: null
-  location: src/compilation/images/ubuntu_root_ssh.qcow2
+  location: /data/mhbench/images/ubuntu_root_ssh.qcow2
 - name: ubuntu_base
   parent: ubuntu_root_ssh
   playbooks:
   - install_base_packages
   - enable_host_logging
   disk_size_gb: 12
-  location: src/compilation/images/ubuntu_base.qcow2
+  location: /data/mhbench/images/ubuntu_base.qcow2
 - name: webserver
   parent: ubuntu_base
   playbooks:
   - setup_struts
   disk_size_gb: null
-  location: src/compilation/images/webserver.qcow2
+  location: /data/mhbench/images/webserver.qcow2
 - name: sensor
-  parent: ubuntu_base
+  parent: ubuntu24_base
   playbooks:
   - install_zeek_nostart
   - install_suricata_nostart
   - install_filebeat_nostart
   disk_size_gb: 16
-  location: src/compilation/images/sensor.qcow2
+  location: /data/mhbench/images/sensor.qcow2

@@ -10,13 +10,14 @@
         regexp: 'http://'
         replace: 'https://'
 
-    - name: Add Kali Linux GPG key
-      become: true
-      get_url:
-        url: https://archive.kali.org/archive-key.asc
-        dest: /etc/apt/trusted.gpg.d/kali-archive-key.asc
+    - name: Install Kali Linux archive keyring
+      ansible.builtin.copy:
+        src: aux_files/kali-archive-keyring.gpg
+        dest: /usr/share/keyrings/kali-archive-keyring.gpg
+        owner: root
+        group: root
         mode: "0644"
-
+    
     - name: Add Kali Linux repository
       become: true
       copy:
